@@ -15,7 +15,7 @@ class CategoriesComponent extends Component {
       .catch(e => console.log(e));
   }
 
-  onClick = (v) => console.log(v);
+  onClick = (category) => this.props.active(category);
 
   render = () =>
     <Categories
@@ -29,7 +29,7 @@ const mapStateToProps = value => ({ categories: value.appState.categories });
 const mapDispatchToProps = dispatch => {
   return {
     add: (categories) => dispatch(addCategories(categories)),
-    active: (index) => dispatch(activeCategory(index))
+    active: (category) => dispatch(activeCategory(category))
   }
 }
 

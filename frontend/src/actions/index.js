@@ -9,8 +9,8 @@ export function addCategories(categories) {
   return { type: ADD_CATEGORIES, categories: categories }
 };
 
-export function activeCategory(index) {
-  return { type: ACTIVE_CATEGORY, index: index }
+export function activeCategory(category) {
+  return { type: ACTIVE_CATEGORY, category: category }
 };
 
 export function addPosts(posts) {

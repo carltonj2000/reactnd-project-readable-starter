@@ -8,17 +8,24 @@ import Posts from './Posts';
 
 class PostsComponent extends Component {
 
+  postDisplayed = () => this.props.activeCategory === 'none'
+    ? this.props.posts
+    : this.props.posts.filter(post => post.category === this.props.activeCategory)
+
   componentDidMount = () => {
     fetch('/posts', { headers: { 'Authorization': 'whatever-you-want' }})
       .then(resp => resp.json())
-      .then(data => {console.log(data);return this.props.add(data);})
+      .then(data => this.props.add(data))
       .catch(e => console.log(e));
   }
 
-  render = () => <Posts posts={this.props.posts} />
+  render = () => <Posts posts={this.postDisplayed()} />
 }
 
-const mapStateToProps = value => ({ posts: value.appState.posts });
+const mapStateToProps = value => ({
+  posts: value.appState.posts,
+  activeCategory: value.appState.activeCategory
+});
 
 const mapDispatchToProps = dispatch => {
   return {

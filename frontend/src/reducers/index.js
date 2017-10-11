@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   categories: [],
-  activeCategory: null,
+  activeCategory: 'none',
   posts: [],
   comments: []
 };
@@ -21,7 +21,7 @@ const appState = (state = initialState, action) => {
       return {...state, categories: action.categories};
     case ACTIVE_CATEGORY:
       return {...state,
-        activeCategory: action.index
+        activeCategory: action.category
       };
     case ADD_POSTS:
       return {...state,
