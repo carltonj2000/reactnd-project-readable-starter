@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import Categories from './Categories';
-import Posts from './Posts';
-import Comments from './Comments';
+import CategoriesComponent from './CategoriesComponent';
+import PostsComponent from './PostsComponent';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Categories />
+        <CategoriesComponent />
         <br />
-        <Posts />
+        <PostsComponent />
       </div>
     );
   }
