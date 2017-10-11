@@ -8,8 +8,8 @@ class App extends Component {
     return (
       <div>
         <Categories />
+        <br />
         <Posts />
-        <Comments />
       </div>
     );
   }

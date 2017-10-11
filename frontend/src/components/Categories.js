@@ -17,20 +17,17 @@ class Categories extends Component {
   render() {
     return (
       <div>
-        Categories
-        { console.log(this.props.categories)}
+        Select Post Filter Catagory -> (
         { this.props.categories && this.props.categories[0] &&
           this.props.categories.map((category, index) =>
-             <div key={index}>{category.name}</div>
-          )
-        }
+             <span><button key={index}>{category.name}</button>&nbsp;</span>)}
+          <button key="-1">None</button>
+        ).
       </div>
     );
   }
 }
-const mapStateToProps = (value) => {
-  return { categories: value.appState.categories };
-}
+const mapStateToProps = value => ({ categories: value.appState.categories });
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import {
   ADD_CATEGORIES,
   ACTIVE_CATEGORY,
-  ADD_POST,
+  ADD_POSTS,
   REMOVE_POST,
   ADD_COMMENT,
   REMOVE_COMMENT
@@ -23,11 +23,11 @@ const appState = (state = initialState, action) => {
       return {...state,
         activeCategory: action.index
       };
-    case ADD_POST:
+    case ADD_POSTS:
       return {...state,
         posts: [
            ...state.posts,
-           action.post
+           ...action.posts
          ]
       };
     case REMOVE_POST:
