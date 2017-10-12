@@ -7,7 +7,7 @@ function Posts(props) {
     { props.posts && props.posts[0] &&
       props.posts.map((post, index) =>
          <div key={index}>
-           <a href="{post.id}">{post.title}</a>,
+           <a href={"post/" + post.id}>{post.title}</a>,
            Category:{post.category}
          </div>
       )

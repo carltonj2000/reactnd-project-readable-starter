@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   categories: [],
-  activeCategory: 'none',
+  activeCategory: 'all',
   posts: [],
   comments: []
 };

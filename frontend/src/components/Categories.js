@@ -2,7 +2,7 @@ import React from 'react';
 
 function Categories(props) {
   return <div>
-    Select Post Filter Catagory -> (
+    Select Post Catagory To View -> (
     { props.categories && props.categories[0] &&
       props.categories.map((category, index) =>
          <span key={index}>
@@ -10,7 +10,7 @@ function Categories(props) {
              {category.name}
            </button>&nbsp;
          </span>)}
-      <button onClick={() => props.onClick('none')}>none</button>
+      <button onClick={() => props.onClick('all')}>all</button>
     ).
   </div>
 }

@@ -8,7 +8,7 @@ import Posts from './Posts';
 
 class PostsComponent extends Component {
 
-  postDisplayed = () => this.props.activeCategory === 'none'
+  postDisplayed = () => this.props.activeCategory === 'all'
     ? this.props.posts
     : this.props.posts.filter(post => post.category === this.props.activeCategory)
 
