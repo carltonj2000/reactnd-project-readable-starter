@@ -5,13 +5,13 @@ import {
   activeCategory
 } from '../actions';
 import Categories from './Categories';
+import * as ReadableAPI from '../utils/ReadableAPI';
 
 class CategoriesComponent extends Component {
 
   componentDidMount = () => {
-    fetch('/categories', { headers: { 'Authorization': 'whatever-you-want' }})
-      .then(resp => resp.json())
-      .then(data => this.props.add(data.categories))
+    ReadableAPI.getCategories()
+      .then(data => this.props.add(data))
       .catch(e => console.log(e));
   }
 

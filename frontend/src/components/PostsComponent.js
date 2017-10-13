@@ -5,6 +5,7 @@ import {
   removePost
 } from '../actions';
 import Posts from './Posts';
+import * as ReadableAPI from '../utils/ReadableAPI';
 
 class PostsComponent extends Component {
 
@@ -13,8 +14,7 @@ class PostsComponent extends Component {
     : this.props.posts.filter(post => post.category === this.props.activeCategory)
 
   componentDidMount = () => {
-    fetch('/posts', { headers: { 'Authorization': 'whatever-you-want' }})
-      .then(resp => resp.json())
+    ReadableAPI.getPosts()
       .then(data => this.props.add(data))
       .catch(e => console.log(e));
   }

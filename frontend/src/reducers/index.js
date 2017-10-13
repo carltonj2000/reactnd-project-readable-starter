@@ -20,16 +20,9 @@ const appState = (state = initialState, action) => {
     case ADD_CATEGORIES:
       return {...state, categories: action.categories};
     case ACTIVE_CATEGORY:
-      return {...state,
-        activeCategory: action.category
-      };
+      return {...state, activeCategory: action.category};
     case ADD_POSTS:
-      return {...state,
-        posts: [
-           ...state.posts,
-           ...action.posts
-         ]
-      };
+      return {...state, posts: [...action.posts]};
     case REMOVE_POST:
       return {...state,
         posts: state.posts.filter(post => post.id !== action.post.id)
