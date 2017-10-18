@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
 const LinkEdit = styled(Link)`background: #00ffff; font-size: 16px;`;
+const LinkDelete = styled.a`background: #ff7700; font-size: 16px;`;
 
 function PostDetails(props) {
   return <div>
     { props && props.post &&
       <div>
         <h1>Post Details &nbsp;
-          <LinkEdit to={`/post/addEdit/${props.post.id}`}>Edit Post Details</LinkEdit></h1>
+          <LinkEdit to={`/post/addEdit/${props.post.id}`}>Edit Post Details</LinkEdit>&nbsp;
+          <LinkDelete href="#" onClick={() => props.delete(props.post.id)}>Delete This Post</LinkDelete></h1>
         Title: {props.post.title}<br/>
         Body: {props.post.body}<br/>
         Votes: {props.post.voteScore} &nbsp;

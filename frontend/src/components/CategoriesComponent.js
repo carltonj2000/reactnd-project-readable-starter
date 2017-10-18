@@ -10,9 +10,8 @@ import * as ReadableAPI from '../utils/ReadableAPI';
 class CategoriesComponent extends Component {
 
   componentDidMount = () => {
-    ReadableAPI.getCategories()
-      .then(data => this.props.add(data))
-      .catch(e => console.log(e));
+    if (this.props.categories.length === 0)
+      ReadableAPI.getCategories().then(data => this.props.add(data));
   }
 
   onClick = (category) => this.props.active(category);

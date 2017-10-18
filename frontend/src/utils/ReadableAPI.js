@@ -1,3 +1,4 @@
+const uuidv4 = require('uuid/v4');
 const api = process.env.REACT_APP_READABLE_API_URL || 'http://localhost:3000';
 
 let token = localStorage.token;
@@ -29,6 +30,23 @@ export const postVote = (id, vote) =>
     },
     body: JSON.stringify({option: vote})
   }).then(res => res.json())
+
+export const addPost = (data) =>
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      ...data,
+      id: uuidv4(),
+      timestamp: Date.now()
+    })
+  }).then(res => res.json())
+
+export const deletePost = (id) =>
+  fetch(`${api}/posts/${id}`, {method: 'DELETE', headers}).then(res => res.json())
 
 export const commentVote = (id, vote) =>
   fetch(`${api}/comments/${id}`, {
