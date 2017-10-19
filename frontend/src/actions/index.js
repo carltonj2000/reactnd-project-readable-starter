@@ -2,6 +2,7 @@ export const ADD_CATEGORIES = 'ADD_CATEGORIES';
 export const ACTIVE_CATEGORY = 'ACTIVE_CATEGORY';
 export const ADD_POSTS = 'ADD_POSTS';
 export const REMOVE_POST = 'REMOVE_POST';
+export const ACTIVE_POST = 'ACTIVE_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
@@ -19,6 +20,10 @@ export function addPosts(posts) {
 
 export function removePost(id) {
   return { type: REMOVE_POST, id: id }
+};
+
+export function activePost(id) {
+  return { type: ACTIVE_POST, id: id }
 };
 
 export function addComment(comment) {

@@ -22,27 +22,33 @@ class PostsDetailsComponent extends Component {
   componentWillUnmount = () => {
     this.setState(state => ({...state, deleted: false}));
   }
-  postVote = (id, upDown) =>
-    ReadableAPI.postVote(id, upDown)
-      .then(result => this.setState(state => ({...state, post: result})))
-      .catch(e => console.log(e));
 
-  commentVote = (id, upDown) =>
-    ReadableAPI.commentVote(id, upDown)
-      .then(result => {
-          let index = 0;
-          for(let i=0; result.id !== this.state.comments[i].id; i++) index++;
-          return this.setState(state => ({...state,
-            comments: [...state.comments.slice(0,index),
-              result, ...state.comments.slice(index+1)]}))
-        })
-      .catch(e => console.log(e));
-  deletePost = (id) =>
-    ReadableAPI.deletePost(id)
-      .then(() => {
-        this.setState(state => ({...state, deleted: true}));
-        return false;
-      });
+  postVote = (id, upDown) => ReadableAPI.postVote(id, upDown)
+    .then(result => this.setState(state => ({...state, post: result})))
+    .catch(e => console.log(e));
+
+  commentVote = (id, upDown) => ReadableAPI.commentVote(id, upDown)
+    .then(result => {
+        let index = 0;
+        for(let i=0; result.id !== this.state.comments[i].id; i++) index++;
+        return this.setState(state => ({...state,
+          comments: [...state.comments.slice(0,index),
+            result, ...state.comments.slice(index+1)]}))
+      })
+    .catch(e => console.log(e));
+
+  deletePost = (id) => ReadableAPI.deletePost(id)
+    .then(() => {
+      this.setState(state => ({...state, deleted: true}));
+      return false;
+    });
+
+  deleteComment = (id) => ReadableAPI.deleteComment(id)
+    .then(() => {
+      this.setState(state =>
+        ({...state, comments: state.comments.filter(c => c.id !== id)}));
+      return true;
+    });
 
   render = () => <div>
     { !this.state.deleted && <div>
@@ -52,7 +58,12 @@ class PostsDetailsComponent extends Component {
           vote={this.postVote}
           delete={this.deletePost}
         />
-        <Comments comments={this.state.comments} vote={this.commentVote} />
+        <Comments
+          comments={this.state.comments}
+          vote={this.commentVote}
+          parent={this.props.id}
+          delete={this.deleteComment}
+        />
       </div>
     }
     { this.state.deleted &&

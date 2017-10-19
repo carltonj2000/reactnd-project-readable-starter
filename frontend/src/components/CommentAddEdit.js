@@ -1,23 +1,14 @@
 import React from 'react';
 
-function CommandAddEdit(props) {
+function CommentAddEdit(props) {
   return <div>
-    <h1>Add/Edit Post</h1>
+    <h1>Add/Edit Comment</h1>
     <form onSubmit={props.submit}>
-        <label htmlFor="title">Title:
-          <input id="title" type="text" name="title" />
-        </label><br />
         <label htmlFor="body">Body:
           <textarea id="body" type="text" name="body" />
         </label><br />
         <label htmlFor="author">Author:
           <input id="author" type="text" name="author" />
-        </label><br />
-        <label htmlFor="category">Category:
-          <select id="category">
-            { props.categories.map((category, i) =>
-              <option key={i} value={category}>{category}</option>)}
-          </select>
         </label><br />
         <input type="submit" value="Submit" />
     </form>
@@ -32,4 +23,4 @@ function CommandAddEdit(props) {
   </div>
 }
 
-export default CommandAddEdit;
+export default CommentAddEdit;

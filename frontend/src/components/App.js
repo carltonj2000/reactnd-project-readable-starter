@@ -24,8 +24,11 @@ class App extends Component {
           <Route path="/post/:id" render={(props) => (
             <PostDetailsComponent id={props.match.params.id}/>
           )}/>
-          <Route path="/comment/addEdit/:id" render={(props) => (
-            <CommentAddEditComponent id={props.match.params.id}/>
+          <Route path="/comment/addEdit/:parentId/:id" render={(props) => (
+            <CommentAddEditComponent
+              id={props.match.params.id}
+              parentId={props.match.params.parentId}
+            />
           )}/>
         </Switch>
       </div>

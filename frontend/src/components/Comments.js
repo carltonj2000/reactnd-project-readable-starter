@@ -5,16 +5,21 @@ import * as ReadableAPI from '../utils/ReadableAPI';
 
 const LinkAdd = styled(Link)`background: #ff3311;`;
 const LinkEdit = styled(Link)`background: #00ffff; font-size: 16px;`;
+const LinkDelete = styled.a`background: #ff7700; font-size: 16px;`;
 
 function Comments(props) {
   return <div>
     <h2>Comments</h2>
-    <LinkAdd to="/comment/addEdit/0">Add New Comment</LinkAdd>
+
+    <LinkAdd to={`/comment/addEdit/${props.parent}/0`}>Add New Comment</LinkAdd>
     { props && props.comments && props.comments[0] &&
       props.comments.map((comment, index) =>
         <div key={index}>
           <h3>Comment Details &nbsp;
-            <LinkEdit to={`/comment/addEdit/${comment.id}`}>Edit Comment Details</LinkEdit></h3>
+            <LinkEdit to={`/comment/addEdit/${props.parent}/${comment.id}`}>Edit Comment Details</LinkEdit>
+            &nbsp;
+            <LinkDelete href="#" onClick={() => props.delete(comment.id)}>Delete This Comment</LinkDelete>
+          </h3>
           Body: {comment.body}<br/>
           Votes: {comment.voteScore} &nbsp;
                   <button onClick={() => props.vote(comment.id, 'upVote')}>+</button>

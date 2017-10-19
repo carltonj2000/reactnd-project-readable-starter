@@ -48,6 +48,23 @@ export const addPost = (data) =>
 export const deletePost = (id) =>
   fetch(`${api}/posts/${id}`, {method: 'DELETE', headers}).then(res => res.json())
 
+export const addComment = (data) =>
+  fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      ...data,
+      id: uuidv4(),
+      timestamp: Date.now()
+    })
+  }).then(res => res.json())
+
+export const deleteComment = (id) =>
+  fetch(`${api}/comments/${id}`, {method: 'DELETE', headers}).then(res => res.json())
+
 export const commentVote = (id, vote) =>
   fetch(`${api}/comments/${id}`, {
     method: 'POST',

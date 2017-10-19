@@ -4,6 +4,7 @@ import {
   ACTIVE_CATEGORY,
   ADD_POSTS,
   REMOVE_POST,
+  ACTIVE_POST,
   ADD_COMMENT,
   REMOVE_COMMENT
 } from '../actions';
@@ -12,7 +13,8 @@ const initialState = {
   categories: [],
   activeCategory: 'all',
   posts: [],
-  comments: []
+  comments: [],
+  activePost: null
 };
 
 const appState = (state = initialState, action) => {
@@ -27,6 +29,8 @@ const appState = (state = initialState, action) => {
       return {...state,
         posts: state.posts.filter(post => post.id !== action.post.id)
       };
+    case ACTIVE_POST:
+      return {...state, activePost: action.id};
     case ADD_COMMENT:
       return {...state,
         posts: [
