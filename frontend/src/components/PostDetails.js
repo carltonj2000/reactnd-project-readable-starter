@@ -10,9 +10,9 @@ function PostDetails(props) {
   return <div>
     { props && props.post &&
       <div>
-        <h1>Post Details &nbsp;
-          <LinkEdit to={`/post/addEdit/${props.post.id}`}>Edit Post Details</LinkEdit>&nbsp;
-          <LinkDelete href="#" onClick={() => props.delete(props.post.id)}>Delete This Post</LinkDelete>
+        <h1>Post&nbsp;
+          <LinkEdit to={`/post/addEdit/${props.post.id}`}>Edit</LinkEdit>&nbsp;
+          <LinkDelete href="#" onClick={() => props.delete(props.post.id)}>Delete</LinkDelete>
         </h1>
         Title: {props.post.title}<br/>
         Body: {props.post.body}<br/>

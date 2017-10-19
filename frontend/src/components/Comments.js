@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
 const LinkAdd = styled(Link)`background: #ff3311;`;
-const LinkEdit = styled(Link)`background: #00ffff; font-size: 16px;`;
-const LinkDelete = styled.a`background: #ff7700; font-size: 16px;`;
+const LinkEdit = styled(Link)`background: #00ffff; font-size: 12px;`;
+const LinkDelete = styled.a`background: #ff7700; font-size: 12px;`;
 
 function Comments(props) {
   return <div>
@@ -15,10 +15,10 @@ function Comments(props) {
     { props && props.comments && props.comments[0] &&
       props.comments.map((comment, index) =>
         <div key={index}>
-          <h3>Comment Details &nbsp;
-            <LinkEdit to={`/comment/addEdit/${props.parent}/${comment.id}`}>Edit Comment Details</LinkEdit>
+          <h3>Comment &nbsp;
+            <LinkEdit to={`/comment/addEdit/${props.parent}/${comment.id}`}>Edit</LinkEdit>
             &nbsp;
-            <LinkDelete href="#" onClick={() => props.delete(comment.id)}>Delete This Comment</LinkDelete>
+            <LinkDelete href="#" onClick={() => props.delete(comment.id)}>Delete</LinkDelete>
           </h3>
           Body: {comment.body}<br/>
           Votes: {comment.voteScore} &nbsp;
