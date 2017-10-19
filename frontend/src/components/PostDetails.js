@@ -1,10 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import styled from 'styled-components';
 import * as ReadableAPI from '../utils/ReadableAPI';
-
-const LinkEdit = styled(Link)`background: #00ffff; font-size: 16px;`;
-const LinkDelete = styled.a`background: #ff7700; font-size: 16px;`;
+import { LinkEdit, LinkDelete } from '../utils/Style';
 
 function PostDetails(props) {
   return <div>

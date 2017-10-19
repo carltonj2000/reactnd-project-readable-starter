@@ -1,11 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import styled from 'styled-components';
 import * as ReadableAPI from '../utils/ReadableAPI';
-
-const LinkAdd = styled(Link)`background: #ff3311;`;
-const LinkEdit = styled(Link)`background: #00ffff; font-size: 12px;`;
-const LinkDelete = styled.a`background: #ff7700; font-size: 12px;`;
+import { LinkAdd, LinkEdit, LinkDelete } from '../utils/Style';
 
 function Comments(props) {
   return <div>

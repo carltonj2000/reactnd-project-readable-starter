@@ -1,9 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import styled from 'styled-components';
-
-const LinkAdd = styled(Link)`background: #ff3311;`;
-const LinkEdit = styled(Link)`background: #00ffff;`;
+import { LinkAdd, LinkEdit } from '../utils/Style';
 
 function Posts(props) {
   return <div>
