@@ -1,13 +1,12 @@
 import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
-import { LinkEdit, LinkDelete } from '../utils/Style';
+import { LinkDelete } from '../utils/Style';
 
 function PostDetails(props) {
   return <div>
     { props && props.post &&
       <div>
         <h1>Post&nbsp;
-          <LinkEdit to={`/post/addEdit/${props.post.id}`}>Edit</LinkEdit>&nbsp;
           <LinkDelete href="#" onClick={() => props.delete(props.post.id)}>Delete</LinkDelete>
         </h1>
         Title: {props.post.title}<br/>

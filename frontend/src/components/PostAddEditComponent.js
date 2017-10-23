@@ -8,13 +8,19 @@ import { addCategories } from '../actions';
 class PostAddEditComponent extends Component {
   state = {
     errors: [],
-    posted: false
+    posted: false,
+    activePost: null
   }
 
   componentDidMount = () => {
     if (this.props.categories.length === 0) {
       ReadableAPI.getCategories().then(data => this.props.add(data));
     }
+    if (this.props.id !== '0') { // add if 0 else edit
+      ReadableAPI.getPost(this.props.id).then(post =>
+        this.setState(state => ({...state, activePost: post})));
+    }
+    console.log(this.props);
   }
 
   componentWillUnmount = () => {
@@ -37,25 +43,37 @@ class PostAddEditComponent extends Component {
       this.setState(state =>
         ({...state, errors: state.errors.concat("body is empty")}));
     }
-    const author = e.target.author.value;
-    if (!author) {
-      errors = true;
-      this.setState(state =>
-        ({...state, errors: state.errors.concat("author is empty")}));
-    }
-    const option = e.target.category;
-    const category = option.options[option.selectedIndex].value;
-    if (category === 'none') {
-      errors = true;
-      this.setState(state =>
-        ({...state, errors: state.errors.concat("category should not be none")}));
+
+  let author = '';
+  let option = '';
+  let category = '';
+  if (this.props.id === '0') {
+      author = e.target.author.value;
+      if (!author) {
+        errors = true;
+        this.setState(state =>
+          ({...state, errors: state.errors.concat("author is empty")}));
+      }
+      option = e.target.category;
+      category = option.options[option.selectedIndex].value;
+      if (category === 'none') {
+        errors = true;
+        this.setState(state =>
+          ({...state, errors: state.errors.concat("category should not be none")}));
+      }
     }
     if (!errors) {
-      console.log('no errors');
-      ReadableAPI.addPost({title, body, author, category}).then(() => {
-        this.setState(state => ({...state, posted: true}));
-        return false;
-      });
+      if (this.props.id === '0') {
+        ReadableAPI.addPost({title, body, author, category}).then(() => {
+          this.setState(state => ({...state, posted: true}));
+          return false;
+        });
+      } else {
+        ReadableAPI.editPost(this.props.id, {title, body}).then(() => {
+          this.setState(state => ({...state, posted: true}));
+          return false;
+        });
+      }
     }
   }
 
@@ -65,11 +83,11 @@ class PostAddEditComponent extends Component {
         submit={this.submit}
         errors={this.state.errors}
         categories={['none', ...this.props.categories]}
+        id={this.props.id}
+        post={this.state.activePost}
       />
     }
-    { this.state.posted &&
-      <Redirect to="/" />
-    }
+    { this.state.posted && <Redirect to="/" /> }
   </div>
 }
 

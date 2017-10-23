@@ -6,7 +6,15 @@ import { Redirect } from 'react-router';
 class CommentAddEditComponent extends Component {
   state = {
     errors: [],
-    commented: false
+    commented: false,
+    activeComment: null
+  }
+
+  componentDidMount = () => {
+    if (this.props.id !== '0') { // add if 0 else edit
+      ReadableAPI.getComment(this.props.id).then(comment =>
+        this.setState(state => ({...state, activeComment: comment})));
+    }
   }
 
   componentWillUnmount = () => this.setState(state => ({...state, commented: false}));
@@ -21,18 +29,29 @@ class CommentAddEditComponent extends Component {
       this.setState(state =>
         ({...state, errors: state.errors.concat("body is empty")}));
     }
-    const author = e.target.author.value;
-    if (!author) {
-      errors = true;
-      this.setState(state =>
-        ({...state, errors: state.errors.concat("author is empty")}));
+    let author = '';
+    if (this.props.id === '0') {
+      author = e.target.author.value;
+      if (!author) {
+        errors = true;
+        this.setState(state =>
+          ({...state, errors: state.errors.concat("author is empty")}));
+      }
     }
     if (!errors) {
-      ReadableAPI.addComment({body, author, parentId: this.props.parentId})
-        .then(() => {
-          this.setState(state => ({...state, commented: true}));
-          return false;
-        });
+      if (this.props.id === '0') {
+        ReadableAPI.addComment({body, author, parentId: this.props.parentId})
+          .then(() => {
+            this.setState(state => ({...state, commented: true}));
+            return false;
+          });
+      } else {
+        ReadableAPI.editComment(this.props.id, {body})
+          .then(() => {
+            this.setState(state => ({...state, commented: true}));
+            return false;
+          });
+      }
     }
   }
 
@@ -41,6 +60,8 @@ class CommentAddEditComponent extends Component {
       <CommentAddEdit
         submit={this.submit}
         errors={this.state.errors}
+        id={this.props.id}
+        comment={this.state.activeComment}
       />
     }
     { this.state.commented &&
