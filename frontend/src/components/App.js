@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import CategoriesComponent from './CategoriesComponent';
+import FilterComponent from './FilterComponent';
 import PostsComponent from './PostsComponent';
 import PostDetailsComponent from './PostDetailsComponent';
 import PostAddEditComponent from './PostAddEditComponent';
 import CommentAddEditComponent from './CommentAddEditComponent';
 import {Route, Switch} from 'react-router-dom';
+import { Title } from '../utils/Style';
 
 class App extends Component {
   render() {
     return (
       <div>
+        <Title>Udacity React Readble Project</Title>
         <Switch>
           <Route exact path="/" render={() => (
             <div>
               <CategoriesComponent />
+              <br />
+              <FilterComponent />
               <br />
               <PostsComponent />
             </div>

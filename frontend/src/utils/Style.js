@@ -8,11 +8,15 @@ labelw: '90px'
 };
 
 export const LinkAdd = styled(Link)`
-  background: #ff3311;
+  background: #ff0;
+  font-size: 12px;
   `;
 export const LinkEdit = styled(Link)`
   background: #00ffff;
   font-size: 12px;
+  `;
+export const Title = styled.h1`
+  background: #ddd;
   `;
 export const LinkDelete = styled.a`
   background: #ff7700;

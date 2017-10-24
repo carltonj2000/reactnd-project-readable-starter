@@ -2,7 +2,7 @@ import React from 'react';
 
 function Categories(props) {
   return <div>
-    Select Post Catagory To View -> (
+    Select View Catagory &rarr; (&nbsp;
     { props.categories && props.categories[0] &&
       props.categories.map((category, index) =>
          <span key={index}>
@@ -10,8 +10,8 @@ function Categories(props) {
              {category.name}
            </button>&nbsp;
          </span>)}
-      <button onClick={() => props.onClick('all')}>all</button>
-    ).
+      <button onClick={() => props.onClick('all')}>all</button>&nbsp;).
+    Presently Viewing {props.category.toUpperCase()} Posts.
   </div>
 }
 

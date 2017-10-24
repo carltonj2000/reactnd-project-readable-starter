@@ -6,9 +6,9 @@ function PostDetails(props) {
   return <div>
     { props && props.post &&
       <div>
-        <h1>Post&nbsp;
+        <h2>Post&nbsp;
           <LinkDelete href="#" onClick={() => props.delete(props.post.id)}>Delete</LinkDelete>
-        </h1>
+        </h2>
         Title: {props.post.title}<br/>
         Body: {props.post.body}<br/>
         Votes: {props.post.voteScore} &nbsp;

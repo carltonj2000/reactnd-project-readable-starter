@@ -1,75 +1,78 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  removePost,
+  activePost,
+  vote4Post,
+  addComment,
+  removeComment,
+  vote4Comment,
+} from '../actions';
+import { Link, Redirect } from 'react-router-dom';
+
 import PostDetails from './PostDetails';
 import Comments from './Comments';
 import * as ReadableAPI from '../utils/ReadableAPI';
-import { Link, Redirect } from 'react-router-dom';
 
 class PostsDetailsComponent extends Component {
   state = {
-    post: null,
-    comments: [],
     deleted: false
   }
+
   componentDidMount = () => {
-    ReadableAPI.getPost(this.props.id)
-      .then(data => this.setState(state => ({...state, post: data})))
-      .catch(e => console.log(e));
-    ReadableAPI.getPostComments(this.props.id)
-      .then(data => this.setState(state => ({...state, comments: data})))
-      .catch(e => console.log(e));
+    ReadableAPI.getPost(this.props.id, this.props.activePost);
+    ReadableAPI.getPostComments(this.props.id, this.props.addComment);
   }
 
-  componentWillUnmount = () => {
-    this.setState(state => ({...state, deleted: false}));
-  }
+  componentWillUnmount = () => this.setState(state => ({...state, deleted: false}));
+  postVote = (id, upDown) => ReadableAPI.vote4Post(id, upDown, this.props.vote4Post);
+  commentVote = (id, upDown) => ReadableAPI.vote4Comment(id, upDown, this.props.vote4Comment);
 
-  postVote = (id, upDown) => ReadableAPI.postVote(id, upDown)
-    .then(result => this.setState(state => ({...state, post: result})))
-    .catch(e => console.log(e));
-
-  commentVote = (id, upDown) => ReadableAPI.commentVote(id, upDown)
-    .then(result => {
-        let index = 0;
-        for(let i=0; result.id !== this.state.comments[i].id; i++) index++;
-        return this.setState(state => ({...state,
-          comments: [...state.comments.slice(0,index),
-            result, ...state.comments.slice(index+1)]}))
-      })
-    .catch(e => console.log(e));
-
-  deletePost = (id) => ReadableAPI.deletePost(id)
+  deletePost = (id) => ReadableAPI.deletePost(id, this.props.removePost)
     .then(() => {
       this.setState(state => ({...state, deleted: true}));
       return false;
     });
 
-  deleteComment = (id) => ReadableAPI.deleteComment(id)
-    .then(() => {
-      this.setState(state =>
-        ({...state, comments: state.comments.filter(c => c.id !== id)}));
-      return true;
-    });
+  deleteComment = (id) => ReadableAPI.deleteComment(id, this.props.removeComment)
+    .then(() => true);
 
   render = () => <div>
     { !this.state.deleted && <div>
         <Link to="/">Return to Post's Summary</Link>
         <PostDetails
-          post={this.state.post}
+          post={this.props.post}
           vote={this.postVote}
           delete={this.deletePost}
         />
         <Comments
-          comments={this.state.comments}
+          comments={this.props.comments}
           vote={this.commentVote}
           parent={this.props.id}
           delete={this.deleteComment}
         />
       </div>
-    }
+  }
     { this.state.deleted &&
       <Redirect to="/" />
     }
   </div>
 }
 
-export default PostsDetailsComponent;
+const mapStateToProps = value => ({
+  post: value.appState.post,
+  comments: value.appState.comments,
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removePost: (id) => dispatch(removePost(id)),
+    activePost: (post) => dispatch(activePost(post)),
+    vote4Post: (id, modifier) => dispatch(vote4Post(id,modifier)),
+    addComment: (comment) => dispatch(addComment(comment)),
+    removeComment: (comment) => dispatch(removeComment(comment)),
+    vote4Comment: (id, modifier) => dispatch(vote4Comment(id,modifier)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostsDetailsComponent);

@@ -1,17 +1,21 @@
 import React from 'react';
-import { LinkAdd, LinkEdit } from '../utils/Style';
+import { LinkAdd } from '../utils/Style';
 
 function Posts(props) {
   return <div>
-    Posts<br />
-    <LinkAdd to='/post/addEdit/0'>Add new post</LinkAdd>
+    <h2>
+      Posts&nbsp;
+      <LinkAdd to='/post/addEdit/0'>Add new post</LinkAdd>
+  </h2>
     { props.posts && props.posts[0] &&
       props.posts.map((post, index) =>
          <div key={index}>
-           <LinkEdit to={`/post/addEdit/${post.id}`}>Edit</LinkEdit>&nbsp;
-           <a href={"post/" + post.id}>{post.title}</a>,
-           Category:{post.category}
-         </div>
+           <a href={"/post/" + post.id}>{post.title}</a>,
+           Vote: {post.voteScore}&nbsp;
+           <button onClick={() => props.vote(post.id, 'upVote')}>+</button>
+           <button onClick={() => props.vote(post.id, 'downVote')}>-</button>,
+         Category:{post.category},&nbsp;
+       </div>
       )
     }
   </div>

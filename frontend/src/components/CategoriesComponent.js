@@ -9,21 +9,21 @@ import * as ReadableAPI from '../utils/ReadableAPI';
 
 class CategoriesComponent extends Component {
 
-  componentDidMount = () => {
-    if (this.props.categories.length === 0)
-      ReadableAPI.getCategories().then(data => this.props.add(data));
-  }
-
+  componentDidMount = () => ReadableAPI.getCategories(this.props.add);
   onClick = (category) => this.props.active(category);
 
   render = () =>
     <Categories
       categories={this.props.categories}
       onClick={this.onClick}
+      category={this.props.category}
     />
 }
 
-const mapStateToProps = value => ({ categories: value.appState.categories });
+const mapStateToProps = value => ({
+  categories: value.appState.categories,
+  category: value.appState.activeCategory
+});
 
 const mapDispatchToProps = dispatch => {
   return {
