@@ -4,7 +4,7 @@ import {
   removePost,
   activePost,
   vote4Post,
-  addComment,
+  addComments,
   removeComment,
   vote4Comment,
 } from '../actions';
@@ -21,7 +21,7 @@ class PostsDetailsComponent extends Component {
 
   componentDidMount = () => {
     ReadableAPI.getPost(this.props.id, this.props.activePost);
-    ReadableAPI.getPostComments(this.props.id, this.props.addComment);
+    ReadableAPI.getPostComments(this.props.id, this.props.addComments);
   }
 
   componentWillUnmount = () => this.setState(state => ({...state, deleted: false}));
@@ -46,7 +46,8 @@ class PostsDetailsComponent extends Component {
           delete={this.deletePost}
         />
         <Comments
-          comments={this.props.comments}
+          comments={this.props.comments &&
+            this.props.comments.sort((l,r) => l.voteScore < r.voteScore)}
           vote={this.commentVote}
           parent={this.props.id}
           delete={this.deleteComment}
@@ -69,7 +70,7 @@ const mapDispatchToProps = dispatch => {
     removePost: (id) => dispatch(removePost(id)),
     activePost: (post) => dispatch(activePost(post)),
     vote4Post: (id, modifier) => dispatch(vote4Post(id,modifier)),
-    addComment: (comment) => dispatch(addComment(comment)),
+    addComments: (comments) => dispatch(addComments(comments)),
     removeComment: (comment) => dispatch(removeComment(comment)),
     vote4Comment: (id, modifier) => dispatch(vote4Comment(id,modifier)),
   }

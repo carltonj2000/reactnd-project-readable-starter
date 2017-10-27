@@ -28,7 +28,7 @@ export const getPost = (id, stateUpdate) =>
 export const getPostComments = (id, stateUpdate) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
   .then(res => res.json())
-  .then(res => res.map(comment => stateUpdate(comment)))
+  .then(res => stateUpdate(res))
   .catch(e => {console.log(e); alert('Failure to access server'); });
 
 export const getComment = (id) =>

@@ -54,7 +54,7 @@ const mapDispatchToProps = dispatch => {
   return {
     add: (posts) => dispatch(addPosts(posts)),
     remove: (id) => dispatch(removePost(id)),
-    vote: (id, modifier) => dispatch(vote4Post(id,modifier)),
+    vote: (id, modifier) => dispatch(vote4Post(id, modifier)),
   }
 }
 

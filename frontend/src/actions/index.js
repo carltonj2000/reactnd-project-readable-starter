@@ -4,47 +4,47 @@ export const ADD_POSTS = 'ADD_POSTS';
 export const REMOVE_POST = 'REMOVE_POST';
 export const ACTIVE_POST = 'ACTIVE_POST';
 export const VOTE4_POST = 'VOTE4_POST';
-export const ADD_COMMENT = 'ADD_COMMENT';
+export const ADD_COMMENTS = 'ADD_COMMENTS';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const VOTE4_COMMENT = 'VOTE4_COMMENT';
 export const ACTIVE_FILTER = 'ACTIVE_FILTER';
 
 export function addCategories(categories) {
-  return { type: ADD_CATEGORIES, categories }
-};
+  return { type: ADD_CATEGORIES, categories };
+}
 
 export function activeCategory(category) {
-  return { type: ACTIVE_CATEGORY, category }
-};
+  return { type: ACTIVE_CATEGORY, category };
+}
 
 export function addPosts(posts) {
-  return { type: ADD_POSTS, posts }
-};
+  return { type: ADD_POSTS, posts };
+}
 
 export function removePost(id) {
-  return { type: REMOVE_POST, id: id }
-};
+  return { type: REMOVE_POST, id };
+}
 
 export function activePost(post) {
-  return { type: ACTIVE_POST, post }
-};
+  return { type: ACTIVE_POST, post };
+}
 
 export function vote4Post(id, modifier) {
-  return { type: VOTE4_POST, id, modifier}
-};
+  return { type: VOTE4_POST, id, modifier };
+}
 
-export function addComment(comment) {
-  return { type: ADD_COMMENT, comment }
-};
+export function addComments(comments) {
+  return { type: ADD_COMMENTS, comments };
+}
 
 export function removeComment(id) {
-  return { type: REMOVE_COMMENT, id }
-};
+  return { type: REMOVE_COMMENT, id };
+}
 
 export function activeFilter(filter) {
-  return { type: ACTIVE_FILTER, filter }
-};
+  return { type: ACTIVE_FILTER, filter };
+}
 
 export function vote4Comment(id, modifier) {
-  return { type: VOTE4_COMMENT, id, modifier}
-};
+  return { type: VOTE4_COMMENT, id, modifier };
+}

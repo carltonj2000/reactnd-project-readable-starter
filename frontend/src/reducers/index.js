@@ -6,7 +6,7 @@ import {
   REMOVE_POST,
   ACTIVE_POST,
   VOTE4_POST,
-  ADD_COMMENT,
+  ADD_COMMENTS,
   REMOVE_COMMENT,
   VOTE4_COMMENT,
   ACTIVE_FILTER,
@@ -49,16 +49,15 @@ const appState = (state = initialState, action) => {
     case ACTIVE_POST:
       return {...state, post: action.post};
     case VOTE4_POST:
+      let active = state.post // setup up active post if none active
+        ? state.post
+        : state.posts.filter(post => post.id === action.id)[0];
+      active.voteScore = active.voteScore + action.modifier;
       return {...state, posts: state.posts.map(post => post.id !== action.id
         ? post : {...post, voteScore: post.voteScore + action.modifier}),
-      post: {...state.post, voteScore: state.post.voteScore + action.modifier}};
-    case ADD_COMMENT:
-      return {...state,
-        comments: [
-           ...state.comments,
-           action.comment
-         ]
-      };
+      post: active};
+    case ADD_COMMENTS:
+      return {...state, comments: action.comments };
     case REMOVE_COMMENT:
       return {...state,
         comments: state.comments.filter(comment => comment.id !== action.id)

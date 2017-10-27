@@ -7,6 +7,7 @@ import reducer from './reducers';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,8 @@ const logger = store => next => action => {
 
 const store = createStore(
   reducer,
-  composeEnhancers(applyMiddleware(logger))
+//  composeEnhancers(applyMiddleware(logger,thunk))
+  composeEnhancers(applyMiddleware(logger),applyMiddleware(thunk))
 );
 
 ReactDOM.render(

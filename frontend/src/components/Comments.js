@@ -4,7 +4,7 @@ import { LinkAdd, LinkEdit, LinkDelete } from '../utils/Style';
 
 function Comments(props) {
   return <div>
-    <h2>Comments</h2>
+    <h2>Comments ({props.comments.length})</h2>
 
     <LinkAdd to={`/comment/addEdit/${props.parent}/0`}>Add New Comment</LinkAdd>
     { props && props.comments && props.comments[0] &&

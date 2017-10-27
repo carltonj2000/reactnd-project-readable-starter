@@ -5,11 +5,11 @@ function Categories(props) {
     Select View Catagory &rarr; (&nbsp;
     { props.categories && props.categories[0] &&
       props.categories.map((category, index) =>
-         <span key={index}>
-           <button onClick={() => props.onClick(category.name)}>
-             {category.name}
-           </button>&nbsp;
-         </span>)}
+        <span key={index}>
+          <button onClick={() => props.onClick(category.name)}>
+            {category.name}
+          </button>&nbsp;
+        </span>)}
       <button onClick={() => props.onClick('all')}>all</button>&nbsp;).
     Presently Viewing {props.category.toUpperCase()} Posts.
   </div>

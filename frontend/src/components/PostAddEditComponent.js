@@ -3,24 +3,23 @@ import PostAddEdit from './PostAddEdit';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import { addCategories } from '../actions';
+import {
+  addCategories,
+  activePost,
+} from '../actions';
 
 class PostAddEditComponent extends Component {
   state = {
     errors: [],
     posted: false,
-    activePost: null
-  }
+}
 
   componentDidMount = () => {
-    if (this.props.categories.length === 0) {
-      ReadableAPI.getCategories().then(data => this.props.add(data));
-    }
-    if (this.props.id !== '0') { // add if 0 else edit
-      ReadableAPI.getPost(this.props.id).then(post =>
-        this.setState(state => ({...state, activePost: post})));
-    }
-    console.log(this.props);
+    if (this.props.id === '0') { // add post if 0 else edit
+      if (this.props.categories.length === 0)
+        ReadableAPI.getCategories(this.props.add);
+    } else
+      ReadableAPI.getPost(this.props.id, this.props.activePost);
   }
 
   componentWillUnmount = () => {
@@ -84,21 +83,28 @@ class PostAddEditComponent extends Component {
         errors={this.state.errors}
         categories={['none', ...this.props.categories]}
         id={this.props.id}
-        post={this.state.activePost}
+        post={this.props.post}
       />
     }
-    { this.state.posted && <Redirect to="/" /> }
+    { /* different return page for add and edit */ }
+    { this.state.posted && (this.props.id === '0') &&
+      <Redirect to={`/`} /> }
+    { this.state.posted && (this.props.id !== '0') &&
+      <Redirect to={`/post/${this.props.id}`} /> }
   </div>
 }
 
 //const mapStateToProps = value => ({ categories: value.appState.categories });
 const mapStateToProps = value => {
-  const categories = value.appState.categories.map(cat => cat.name);
-  return { categories };
+  return {
+    categories : value.appState.categories.map(cat => cat.name),
+    post: value.appState.post,
+  }
 }
 
 const mapDispatchToProps = dispatch => ({
-    add: (categories) => dispatch(addCategories(categories))
+    add: (categories) => dispatch(addCategories(categories)),
+    activePost: (post) => dispatch(activePost(post)),
 });
 
 
