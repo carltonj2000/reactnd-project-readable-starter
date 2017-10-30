@@ -14,15 +14,6 @@ class App extends Component {
       <div>
         <Title>Udacity React Readable Project</Title>
         <Switch>
-          <Route exact path="/" render={() => (
-            <div>
-              <CategoriesComponent />
-              <br />
-              <FilterComponent />
-              <br />
-              <PostsComponent />
-            </div>
-          )}/>
           <Route path="/post/addEdit/:id" render={(props) => (
              <PostAddEditComponent id={props.match.params.id}/>
           )}/>
@@ -34,6 +25,21 @@ class App extends Component {
               id={props.match.params.id}
               parentId={props.match.params.parentId}
             />
+          )}/>
+          <Route path="/pageNotFound" render={() => (
+            <div>
+              <h2>Page Not Found</h2>
+              <h3><a href="/">Return to main/index/home page.</a></h3>
+            </div>
+          )}/>
+          <Route path="/:category?" render={() => (
+            <div>
+              <CategoriesComponent />
+              <br />
+              <FilterComponent />
+              <br />
+              <PostsComponent />
+            </div>
           )}/>
         </Switch>
       </div>

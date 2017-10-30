@@ -68,9 +68,12 @@ class PostsDetailsComponent extends Component {
           delete={this.deleteComment}
         />
       </div>
-  }
-    { this.state.deleted &&
-      <Redirect to="/" />
+    }
+    { this.state.deleted && <Redirect to="/" /> }
+    { !this.state.deleted && this.props.post &&
+      Object.keys(this.props.post).length === 0 &&
+      this.props.post.constructor === Object &&
+      <Redirect to="/pageNotFound" />
     }
   </div>
 }
