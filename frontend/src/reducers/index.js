@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
+import categoriesState from '../categories/categoriesReducer';
+
 import {
-  ADD_CATEGORIES,
-  ACTIVE_CATEGORY,
   ADD_POSTS,
   REMOVE_POST,
   ACTIVE_POST,
@@ -10,11 +10,9 @@ import {
   REMOVE_COMMENT,
   VOTE4_COMMENT,
   ACTIVE_FILTER,
-} from '../actions';
+} from '../actions/types';
 
 const initialState = {
-  categories: [],
-  activeCategory: 'all',
   posts: [],
   post: null,
   comments: [],
@@ -27,10 +25,6 @@ const initialState = {
 
 const appState = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CATEGORIES:
-      return {...state, categories: action.categories};
-    case ACTIVE_CATEGORY:
-      return {...state, activeCategory: action.category};
     case ACTIVE_FILTER:
       let index = action.filter;
       let filter = state.filters.slice(index,index + 1)[0];
@@ -71,5 +65,6 @@ const appState = (state = initialState, action) => {
 
 
 export default combineReducers({
-  appState
+  appState,
+  categoriesState
 })

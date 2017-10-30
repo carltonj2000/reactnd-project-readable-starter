@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import CategoriesComponent from './CategoriesComponent';
+import CategoriesComponent from '../categories/CategoriesComponent';
 import FilterComponent from './FilterComponent';
 import PostsComponent from './PostsComponent';
 import PostDetailsComponent from './PostDetailsComponent';
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Title>Udacity React Readble Project</Title>
+        <Title>Udacity React Readable Project</Title>
         <Switch>
           <Route exact path="/" render={() => (
             <div>

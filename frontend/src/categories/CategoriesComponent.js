@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   addCategories,
   activeCategory
-} from '../actions';
+} from './categoriesActions';
 import Categories from './Categories';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
@@ -21,8 +21,8 @@ class CategoriesComponent extends Component {
 }
 
 const mapStateToProps = value => ({
-  categories: value.appState.categories,
-  category: value.appState.activeCategory
+  categories: value.categoriesState.categories,
+  category: value.categoriesState.activeCategory
 });
 
 const mapDispatchToProps = dispatch => {

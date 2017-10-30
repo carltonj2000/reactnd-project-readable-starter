@@ -45,7 +45,7 @@ class PostsComponent extends Component {
 
 const mapStateToProps = value => ({
   posts: value.appState.posts,
-  activeCategory: value.appState.activeCategory,
+  activeCategory: value.categoriesState.activeCategory,
   filters: value.appState.filters,
   activeFilter: value.appState.activeFilter,
 });

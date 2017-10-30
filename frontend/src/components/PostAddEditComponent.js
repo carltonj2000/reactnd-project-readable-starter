@@ -4,9 +4,12 @@ import * as ReadableAPI from '../utils/ReadableAPI';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import {
-  addCategories,
   activePost,
 } from '../actions';
+
+import {
+  addCategories,
+} from '../categories/categoriesActions';
 
 class PostAddEditComponent extends Component {
   state = {

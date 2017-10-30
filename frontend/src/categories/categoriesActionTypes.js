@@ -1,0 +1,2 @@
+export const ADD_CATEGORIES = 'ADD_CATEGORIES';
+export const ACTIVE_CATEGORY = 'ACTIVE_CATEGORY';

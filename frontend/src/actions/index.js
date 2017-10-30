@@ -1,21 +1,13 @@
-export const ADD_CATEGORIES = 'ADD_CATEGORIES';
-export const ACTIVE_CATEGORY = 'ACTIVE_CATEGORY';
-export const ADD_POSTS = 'ADD_POSTS';
-export const REMOVE_POST = 'REMOVE_POST';
-export const ACTIVE_POST = 'ACTIVE_POST';
-export const VOTE4_POST = 'VOTE4_POST';
-export const ADD_COMMENTS = 'ADD_COMMENTS';
-export const REMOVE_COMMENT = 'REMOVE_COMMENT';
-export const VOTE4_COMMENT = 'VOTE4_COMMENT';
-export const ACTIVE_FILTER = 'ACTIVE_FILTER';
-
-export function addCategories(categories) {
-  return { type: ADD_CATEGORIES, categories };
-}
-
-export function activeCategory(category) {
-  return { type: ACTIVE_CATEGORY, category };
-}
+import {
+  ADD_POSTS,
+  REMOVE_POST,
+  ACTIVE_POST,
+  VOTE4_POST,
+  ADD_COMMENTS,
+  REMOVE_COMMENT,
+  VOTE4_COMMENT,
+  ACTIVE_FILTER,
+} from './types';
 
 export function addPosts(posts) {
   return { type: ADD_POSTS, posts };
