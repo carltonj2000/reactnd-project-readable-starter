@@ -2,16 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-import {
-  removePost,
-  activePost,
-  vote4Post,
-} from './postsActions';
-import {
-  addComments,
-  removeComment,
-  vote4Comment,
-} from '../comments/commentsActions';
+import * as postsActions from './postsActions';
+import * as commentsActions from '../comments/commentsActions';
 import Comments from '../comments/comments';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { LinkDelete, LinkEdit } from '../utils/Style';
@@ -88,15 +80,4 @@ const mapStateToProps = value => ({
   comments: value.commentsState.comments,
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    removePost: (id) => dispatch(removePost(id)),
-    activePost: (post) => dispatch(activePost(post)),
-    vote4Post: (id, modifier) => dispatch(vote4Post(id,modifier)),
-    addComments: (comments) => dispatch(addComments(comments)),
-    removeComment: (comment) => dispatch(removeComment(comment)),
-    vote4Comment: (id, modifier) => dispatch(vote4Comment(id,modifier)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostsDetailsComponent);
+export default connect(mapStateToProps, {...postsActions, ...commentsActions})(PostsDetailsComponent);

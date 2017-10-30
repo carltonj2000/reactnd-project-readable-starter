@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { activeFilter } from './filterActions';
+import * as actions from './filterActions';
 
 export function Filter(props) {
   return <div>
@@ -25,7 +25,7 @@ class  FilterComponent extends Component {
   render = () =>
     <Filter
       filters={this.props.filters}
-      onClick={this.props.active}
+      onClick={this.props.activeFilter}
       current={this.props.current}
     />
 }
@@ -35,10 +35,4 @@ const mapStateToProps = value => ({
   current: value.filterState.filters[value.filterState.activeFilter]
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    active: (index) => dispatch(activeFilter(index))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent);
+export default connect(mapStateToProps, actions)(FilterComponent);

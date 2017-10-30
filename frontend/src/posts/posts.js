@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { LinkAdd } from '../utils/Style';
 
-import {
-  addPosts,
-  removePost,
-  vote4Post,
-} from './postsActions';
+import * as actions from './postsActions';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
 export function Posts(props) {
@@ -53,9 +49,9 @@ class PostsComponent extends Component {
     return filtered;
   }
 
-  componentDidMount = () => ReadableAPI.getPosts(this.props.add);
-  vote = (id, upDown) => ReadableAPI.vote4Post(id, upDown, this.props.vote);
-  delete = (id) => ReadableAPI.deletePost(id, this.props.remove);
+  componentDidMount = () => ReadableAPI.getPosts(this.props.addPosts);
+  vote = (id, upDown) => ReadableAPI.vote4Post(id, upDown, this.props.vote4Post);
+  delete = (id) => ReadableAPI.deletePost(id, this.props.removePost);
 
   render = () => <Posts
     posts={this.postDisplayed()}
@@ -71,12 +67,4 @@ const mapStateToProps = value => ({
   activeFilter: value.filterState.activeFilter,
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    add: (posts) => dispatch(addPosts(posts)),
-    remove: (id) => dispatch(removePost(id)),
-    vote: (id, modifier) => dispatch(vote4Post(id, modifier)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostsComponent);
+export default connect(mapStateToProps, actions)(PostsComponent);

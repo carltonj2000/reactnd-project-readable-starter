@@ -3,8 +3,8 @@ import { Input, Text, Label } from '../utils/Style';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import { activePost, } from './postsActions';
-import { addCategories, } from '../categories/categoriesActions';
+import * as postsActions from './postsActions';
+import * as categoriesActions from '../categories/categoriesActions';
 
 export function PostAddEdit(props) {
   return <div>
@@ -61,7 +61,7 @@ class PostAddEditComponent extends Component {
   componentDidMount = () => {
     if (this.props.id === '0') { // add post if 0 else edit
       if (this.props.categories.length === 0)
-        ReadableAPI.getCategories(this.props.add);
+        ReadableAPI.getCategories(this.props.addCategories);
     } else
       ReadableAPI.getPost(this.props.id, this.props.activePost);
   }
@@ -143,10 +143,4 @@ const mapStateToProps = value => ({
   post: value.postsState.post,
 });
 
-const mapDispatchToProps = dispatch => ({
-  add: (categories) => dispatch(addCategories(categories)),
-  activePost: (post) => dispatch(activePost(post)),
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostAddEditComponent);
+export default connect(mapStateToProps, {...postsActions, ...categoriesActions})(PostAddEditComponent);

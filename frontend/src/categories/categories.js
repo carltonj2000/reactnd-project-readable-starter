@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  addCategories,
-  activeCategory
-} from './categoriesActions';
+import * as categoriesActions from './categoriesActions';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
 export function Categories(props) {
   return <div>
-    Select View Catagory &rarr; (&nbsp;
+    Select View By Catagory &rarr; (&nbsp;
     { props.categories && props.categories[0] &&
       props.categories.map((category, index) =>
         <span key={index}>
@@ -24,8 +21,8 @@ export function Categories(props) {
 
 class CategoriesComponent extends Component {
 
-  componentDidMount = () => ReadableAPI.getCategories(this.props.add);
-  onClick = (category) => this.props.active(category);
+  componentDidMount = () => ReadableAPI.getCategories(this.props.addCategories);
+  onClick = (category) => this.props.activeCategory(category);
 
   render = () =>
     <Categories
@@ -40,11 +37,4 @@ const mapStateToProps = value => ({
   category: value.categoriesState.activeCategory
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    add: (categories) => dispatch(addCategories(categories)),
-    active: (category) => dispatch(activeCategory(category))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesComponent);
+export default connect(mapStateToProps, categoriesActions)(CategoriesComponent);
