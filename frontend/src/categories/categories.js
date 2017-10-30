@@ -7,8 +7,6 @@ import {
 } from './categoriesActions';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
-
-// Stateless Component
 export function Categories(props) {
   return <div>
     Select View Catagory &rarr; (&nbsp;
@@ -23,9 +21,6 @@ export function Categories(props) {
     Presently Viewing {props.category.toUpperCase()} Posts.
   </div>
 }
-
-
-// Container With State For The Above Stateless Component
 
 class CategoriesComponent extends Component {
 

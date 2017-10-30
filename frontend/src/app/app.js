@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import CategoriesComponent from '../categories/categories';
-import FilterComponent from './FilterComponent';
-import PostsComponent from './PostsComponent';
-import PostDetailsComponent from './PostDetailsComponent';
-import PostAddEditComponent from './PostAddEditComponent';
-import CommentAddEditComponent from './CommentAddEditComponent';
+import FilterComponent from '../filter/filter';
+import PostsComponent from '../posts/posts';
+import PostDetailsComponent from '../posts/postDetails';
+import PostAddEditComponent from '../posts/postAddEdit';
+import CommentAddEditComponent from '../comments/commentAddEdit';
 import { Title } from '../utils/Style';
 
 class App extends Component {

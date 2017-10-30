@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+
 import {
   removePost,
   activePost,
   vote4Post,
+} from './postsActions';
+import {
   addComments,
   removeComment,
   vote4Comment,
-} from '../actions';
-import { Link, Redirect } from 'react-router-dom';
-
-import PostDetails from './PostDetails';
-import Comments from './Comments';
+} from '../comments/commentsActions';
+import Comments from '../comments/comments';
 import * as ReadableAPI from '../utils/ReadableAPI';
+import { LinkDelete, LinkEdit } from '../utils/Style';
+
+export function PostDetails(props) {
+  return <div>
+    { props && props.post &&
+      <div>
+        <h2>Post&nbsp;
+          <LinkEdit to={`/post/addEdit/${props.post.id}`}>Edit</LinkEdit>&nbsp;
+          <LinkDelete href="#" onClick={() => props.delete(props.post.id)}>Delete</LinkDelete>
+        </h2>
+        Title: {props.post.title}<br/>
+        Body: {props.post.body}<br/>
+        Votes: {props.post.voteScore} &nbsp;
+                <button onClick={() => props.vote(props.post.id, 'upVote')}>+</button>
+                <button onClick={() => props.vote(props.post.id, 'downVote')}>-</button><br/>
+        Author: {props.post.author}<br/>
+        Category: {props.post.category}<br/>
+        Date: {ReadableAPI.formatDate(props.post.timestamp)}
+      </div>
+    }
+  </div>
+}
 
 class PostsDetailsComponent extends Component {
   state = {
@@ -61,8 +84,8 @@ class PostsDetailsComponent extends Component {
 }
 
 const mapStateToProps = value => ({
-  post: value.appState.post,
-  comments: value.appState.comments,
+  post: value.postsState.post,
+  comments: value.commentsState.comments,
 });
 
 const mapDispatchToProps = dispatch => {

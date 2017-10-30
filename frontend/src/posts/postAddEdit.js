@@ -1,15 +1,56 @@
 import React, { Component } from 'react';
-import PostAddEdit from './PostAddEdit';
+import { Input, Text, Label } from '../utils/Style';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import {
-  activePost,
-} from '../actions';
+import { activePost, } from './postsActions';
+import { addCategories, } from '../categories/categoriesActions';
 
-import {
-  addCategories,
-} from '../categories/categoriesActions';
+export function PostAddEdit(props) {
+  return <div>
+    <h1>
+      { props.id === '0' ? <span>Add</span> : <span>Edit</span> } Post
+    </h1>
+    <form onSubmit={props.submit}>
+        <Label htmlFor="title">Title:</Label>
+          { props.id === '0' &&
+            <Input id="title" type="text" name="title" />
+          }
+          { props.id !== '0' && props.post &&
+            <Input id="title" type="text" name="title" defaultValue={`${props.post.title}`}/>
+          }
+        <br />
+        <Label htmlFor="body">Body:</Label>
+          { props.id === '0' &&
+          <Text id="body" type="text" name="body"/>
+          }
+          { props.id !== '0' && props.post &&
+          <Text id="body" type="text" name="body" defaultValue={`${props.post.body}`}/>
+          }
+        <br />
+        { props.id === '0' && <div>
+          <Label htmlFor="author">Author:</Label>
+            <Input id="author" type="text" name="author" />
+          <br />
+          <Label htmlFor="category">Category:</Label>
+            <select id="category">
+              { props.categories.map((category, i) =>
+                <option key={i} value={category}>{category}</option>)}
+            </select>
+          <br />
+        </div>}
+        <input type="submit" value="Submit" />
+    </form>
+    { props && props.errors &&  props.errors[0] &&
+      <div>
+        <h2>Fix The Form Errors Noted Below</h2>
+        <ul>
+          {props.errors.map((error, i) => <li key={i}>{error}</li>)}
+        </ul>
+      </div>
+    }
+  </div>
+}
 
 class PostAddEditComponent extends Component {
   state = {
@@ -97,17 +138,14 @@ class PostAddEditComponent extends Component {
   </div>
 }
 
-//const mapStateToProps = value => ({ categories: value.appState.categories });
-const mapStateToProps = value => {
-  return {
-    categories : value.appState.categories.map(cat => cat.name),
-    post: value.appState.post,
-  }
-}
+const mapStateToProps = value => ({
+  categories : value.categoriesState.categories.map(cat => cat.name),
+  post: value.postsState.post,
+});
 
 const mapDispatchToProps = dispatch => ({
-    add: (categories) => dispatch(addCategories(categories)),
-    activePost: (post) => dispatch(activePost(post)),
+  add: (categories) => dispatch(addCategories(categories)),
+  activePost: (post) => dispatch(activePost(post)),
 });
 
 

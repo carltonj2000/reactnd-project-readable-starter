@@ -8,7 +8,7 @@ const initialState = {
   activeCategory: 'all',
 };
 
-export default function categoriesState (state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_CATEGORIES:
       return {...state, categories: action.categories};

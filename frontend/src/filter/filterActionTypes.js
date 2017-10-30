@@ -1,0 +1,1 @@
+export const ACTIVE_FILTER = 'ACTIVE_FILTER';

@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { LinkAdd } from '../utils/Style';
+
 import {
   addPosts,
   removePost,
   vote4Post,
-} from '../actions';
-import Posts from './Posts';
+} from './postsActions';
 import * as ReadableAPI from '../utils/ReadableAPI';
+
+export function Posts(props) {
+  return <div>
+    <h2>
+      Posts&nbsp;
+      <LinkAdd to='/post/addEdit/0'>Add new post</LinkAdd>
+  </h2>
+    { props.posts && props.posts[0] &&
+      props.posts.map((post, index) =>
+         <div key={index}>
+           <a href={"/post/" + post.id}>{post.title}</a>,
+           Vote: {post.voteScore}&nbsp;
+           <button onClick={() => props.vote(post.id, 'upVote')}>+</button>
+           <button onClick={() => props.vote(post.id, 'downVote')}>-</button>,
+         Category:{post.category},&nbsp;
+       </div>
+      )
+    }
+  </div>
+}
 
 class PostsComponent extends Component {
 
@@ -44,10 +65,10 @@ class PostsComponent extends Component {
 }
 
 const mapStateToProps = value => ({
-  posts: value.appState.posts,
+  posts: value.postsState.posts,
   activeCategory: value.categoriesState.activeCategory,
-  filters: value.appState.filters,
-  activeFilter: value.appState.activeFilter,
+  filters: value.filterState.filters,
+  activeFilter: value.filterState.activeFilter,
 });
 
 const mapDispatchToProps = dispatch => {
