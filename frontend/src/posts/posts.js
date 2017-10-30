@@ -60,11 +60,7 @@ class PostsComponent extends Component {
   />
 }
 
-const mapStateToProps = value => ({
-  posts: value.postsState.posts,
-  activeCategory: value.categoriesState.activeCategory,
-  filters: value.filterState.filters,
-  activeFilter: value.filterState.activeFilter,
-});
+const mapStateToProps = ({postsState, categoriesState, filterState}) =>
+  ({ ...postsState, ...categoriesState, ...filterState });
 
 export default connect(mapStateToProps, actions)(PostsComponent);

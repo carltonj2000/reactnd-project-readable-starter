@@ -75,9 +75,6 @@ class PostsDetailsComponent extends Component {
   </div>
 }
 
-const mapStateToProps = value => ({
-  post: value.postsState.post,
-  comments: value.commentsState.comments,
-});
+const mapStateToProps = ({postsState, commentsState}) => ({...postsState, ...commentsState});
 
 export default connect(mapStateToProps, {...postsActions, ...commentsActions})(PostsDetailsComponent);

@@ -138,9 +138,9 @@ class PostAddEditComponent extends Component {
   </div>
 }
 
-const mapStateToProps = value => ({
-  categories : value.categoriesState.categories.map(cat => cat.name),
-  post: value.postsState.post,
+const mapStateToProps = ({categoriesState, postsState}) => ({
+  categories : categoriesState.categories.map(cat => cat.name),
+  ...postsState
 });
 
 export default connect(mapStateToProps, {...postsActions, ...categoriesActions})(PostAddEditComponent);
