@@ -16,6 +16,7 @@ export function Filter(props) {
          </span>)}
     ).
     Presently Posts Sorted By&nbsp;
+    {console.log(props.current)}
     {props.current.name.toUpperCase()}
     {props.current.ascending ? <span>&uarr;</span> : <span>&darr;</span> }.
   </div>
@@ -30,9 +31,9 @@ class  FilterComponent extends Component {
     />
 }
 
-const mapStateToProps = value => ({
-  filters: value.filterState.filters,
-  current: value.filterState.filters[value.filterState.activeFilter]
+const mapStateToProps = ({filterState}) => ({
+  ...filterState,
+  current: filterState.filters[filterState.activeFilter]
 });
 
 export default connect(mapStateToProps, actions)(FilterComponent);
