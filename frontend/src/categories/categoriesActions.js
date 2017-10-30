@@ -1,7 +1,7 @@
 import {
   ADD_CATEGORIES,
-  ACTIVE_CATEGORY,
+  ACTIVATE_CATEGORY,
 } from './categoriesActionTypes';
 
 export const addCategories = categories => ({ type: ADD_CATEGORIES, categories });
-export const activeCategory = category => ({ type: ACTIVE_CATEGORY, category });
+export const activateCategory = category => ({ type: ACTIVATE_CATEGORY, category });

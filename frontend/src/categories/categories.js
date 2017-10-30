@@ -22,19 +22,15 @@ export function Categories(props) {
 class CategoriesComponent extends Component {
 
   componentDidMount = () => ReadableAPI.getCategories(this.props.addCategories);
-  onClick = (category) => this.props.activeCategory(category);
+  onClick = (category) => this.props.activateCategory(category);
 
   render = () =>
     <Categories
       categories={this.props.categories}
       onClick={this.onClick}
-      category={this.props.category}
+      category={this.props.activeCategory}
     />
 }
 
-const mapStateToProps = value => ({
-  categories: value.categoriesState.categories,
-  category: value.categoriesState.activeCategory
-});
-
+const mapStateToProps = ({ categoriesState }) => ({ ...categoriesState });
 export default connect(mapStateToProps, categoriesActions)(CategoriesComponent);
