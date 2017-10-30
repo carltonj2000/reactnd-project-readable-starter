@@ -15,3 +15,8 @@ To run the application:
   - in the `frontend` directory of the repository execute at the command line
     - `npm install` to install all dependencies,
     - `npm run start` to run the client.
+
+
+### License
+
+MIT Licensed

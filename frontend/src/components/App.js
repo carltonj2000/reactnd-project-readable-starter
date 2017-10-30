@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import CategoriesComponent from '../categories/CategoriesComponent';
+import CategoriesComponent from '../categories/categories';
 import FilterComponent from './FilterComponent';
 import PostsComponent from './PostsComponent';
 import PostDetailsComponent from './PostDetailsComponent';
