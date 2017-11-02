@@ -29,12 +29,12 @@ class App extends Component {
           <Route path="/pageNotFound" render={() => (
             <div>
               <h2>Page Not Found</h2>
-              <h3><a href="/">Return to main/index/home page.</a></h3>
+              <h3><a href="/">Return to main/home/index page.</a></h3>
             </div>
           )}/>
-          <Route path="/:category?" render={() => (
+          <Route render={({history}) => (
             <div>
-              <CategoriesComponent />
+              <CategoriesComponent history={history}/>
               <br />
               <FilterComponent />
               <br />

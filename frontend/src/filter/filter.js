@@ -16,7 +16,6 @@ export function Filter(props) {
          </span>)}
     ).
     Presently Posts Sorted By&nbsp;
-    {console.log(props.current)}
     {props.current.name.toUpperCase()}
     {props.current.ascending ? <span>&uarr;</span> : <span>&darr;</span> }.
   </div>

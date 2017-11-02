@@ -37,3 +37,6 @@ export const Label = styled.label`
   width: ${state.labelw};
   vertical-align: top;
   `;
+export const Invalid = styled.div`
+  background: #f00;
+  `;
