@@ -13,7 +13,12 @@ export function PostDetails(props) {
     { props && props.post &&
       <div>
         <h2>Post&nbsp;
-          <LinkEdit to={`/post/addEdit/${props.post.id}`}>Edit</LinkEdit>&nbsp;
+          <LinkEdit
+            to={`/post/addEdit/${props.post.id}`}
+            returnurl={`/post/${props.post.id}`}
+            >
+            Edit
+          </LinkEdit>&nbsp;
           <LinkDelete href="#" onClick={() => props.delete(props.post.id)}>Delete</LinkDelete>
         </h2>
         Title: {props.post.title}<br/>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Text, Label } from '../utils/Style';
 import * as ReadableAPI from '../utils/ReadableAPI';
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import * as postsActions from './postsActions';
 import * as categoriesActions from '../categories/categoriesActions';
@@ -130,11 +129,7 @@ class PostAddEditComponent extends Component {
         post={this.props.post}
       />
     }
-    { /* different return page for add and edit */ }
-    { this.state.posted && (this.props.id === '0') &&
-      <Redirect to={`/`} /> }
-    { this.state.posted && (this.props.id !== '0') &&
-      <Redirect to={`/post/${this.props.id}`} /> }
+    { this.state.posted && this.props.history.goBack() }
   </div>
 }
 

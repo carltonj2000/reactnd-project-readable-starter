@@ -3,6 +3,7 @@ import {
   REMOVE_POST,
   ACTIVE_POST,
   VOTE4_POST,
+  COMMENTS_ON_POST,
 } from './postsActionTypes';
 
 const initialState = {
@@ -27,6 +28,10 @@ export default (state = initialState, action) => {
       active.voteScore = active.voteScore + action.modifier;
       return {...state, posts: state.posts.map(post => post.id !== action.id
         ? post : {...post, voteScore: post.voteScore + action.modifier}),
+      post: active};
+    case COMMENTS_ON_POST:
+      return {...state, posts: state.posts.map(post => post.id !== action.id
+        ? post : {...post, comments: action.count}),
       post: active};
     default: return state;
   }

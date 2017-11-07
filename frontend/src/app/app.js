@@ -14,9 +14,12 @@ class App extends Component {
       <div>
         <Title>Udacity React Readable Project</Title>
         <Switch>
-          <Route path="/post/addEdit/:id" render={(props) => (
-             <PostAddEditComponent id={props.match.params.id}/>
-          )}/>
+          <Route path="/post/addEdit/:id" render={(props) => {
+            return (<PostAddEditComponent
+              id={props.match.params.id}
+              history={props.history}
+            />)
+          }}/>
           <Route path="/post/:id" render={(props) => (
             <PostDetailsComponent id={props.match.params.id}/>
           )}/>
@@ -32,13 +35,13 @@ class App extends Component {
               <h3><a href="/">Return to main/home/index page.</a></h3>
             </div>
           )}/>
-          <Route render={({history}) => (
+          <Route render={ props => (
             <div>
-              <CategoriesComponent history={history}/>
+              <CategoriesComponent {...props} />
               <br />
-              <FilterComponent />
+              <FilterComponent {...props} />
               <br />
-              <PostsComponent />
+              <PostsComponent {...props} />
             </div>
           )}/>
         </Switch>
